@@ -1,0 +1,74 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Submit A Book</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead">Add that weighty tome you're reading to our database along with one or many Youtube links to create the perfect soundtrack to said weighty tome</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+
+  <% if(infoSubmitObj != '') { %>
+    <div class="col-8 alert alert-success" role="alert">
+      <%= infoSubmitObj %>
+    </div>
+  <% } %>
+
+  <% if(infoErrorsObj != '') { %>
+    <div class="col-8 alert alert-danger" role="alert">
+      <%= infoErrorsObj[0].message %>
+    </div>
+  <% } %>
+
+  <div class="col-8">
+
+    <form action="/submit-book" enctype="multipart/form-data" method="POST">
+    
+      <div class="row g-3">
+
+
+        <div class="col-12">
+          <label for="name" class="form-label">Book Name</label>
+          <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+        
+        <div class="col-12">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="description" id="description" class="form-control" cols="30" rows="4" required></textarea>
+        </div>
+
+        <div class="col-12">
+          <label for="quote" class="form-label">Favorite Quote</label>
+          <input type="text" name="quote" id="quote" class="form-control">
+        </div>
+
+        <div class="col-12">
+          <label for="songs" class="form-label">Songs(s)</label><br>
+          <div class="songList">
+            <div class="songDiv">
+              <input type="text" name="songs" class="form-control" placeholder="dQw4w9WgXcQ" required>
+            </div>
+          </div>
+        </div>
+        <div class="m-0">
+          <small>Example: https://www.youtube.com/watch?v=<span class="text-primary">dQw4w9WgXcQ&ab</span>_channel=RickAstley</small>
+          <br>
+          <small>Example: https://youtu.be/<span class="text-primary">dQw4w9WgXcQ&ab</span></small>
+        </div>
+        <div class="col-12 m-0">
+          <button type="button" class="btn btn-outline-primary" id="addSongBtn">+ to add another song</button>
+        </div>
+
+        <div class="col-12">
+          <label for="image">Book Cover Image</label>
+          <input type="file" class="form-control" name="image" accept="image/*">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-lg btn-primary">Submit listing</button>
+        </div>
+      </div>
+    
+    </form>
+
+  </div>
+</div>

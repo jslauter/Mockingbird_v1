@@ -1,0 +1,62 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold"><%= book.name%> </h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead">Help make this listing even better</p>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+  
+    <div class="col-8">
+  
+      <form action="/edit-book" enctype="multipart/form-data" method="POST">
+      
+        <div class="row g-3">
+  
+  
+          <div class="col-12">
+            <label for="name" class="form-label">Book Name</label>
+            <input type="text" name="name" id="name" class="form-control" value = "<%= book.name%>" required>
+          </div>
+          
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" cols="30" rows="4" required><%= book.description%></textarea>
+          </div>
+  
+          <div class="col-12">
+            <label for="quote" class="form-label">Favorite Quote</label>
+            <input type="text" name="quote" id="quote" class="form-control" value = "<%= book.quote%>">
+          </div>
+  
+          <div class="col-12">
+            <label for="songs" class="form-label">Songs(s)</label><br>
+            <div class="songList">
+              <div class="songDiv">
+                <input type="text" name="songs" class="form-control" placeholder="add one Youtube ID...dQw4w9WgXcQ" required>
+              </div>
+            </div>
+          </div>
+          <div class="m-0">
+            <small>Example: https://www.youtube.com/watch?v=<span class="text-primary">dQw4w9WgXcQ&ab</span>_channel=RickAstley</small>
+            <br>
+            <small>Example: https://youtu.be/<span class="text-primary">dQw4w9WgXcQ&ab</span></small>
+          </div>
+          <div class="col-12 m-0">
+            <button type="button" class="btn btn-outline-primary" id="addSongBtn">+ to add more than one song</button>
+          </div>
+  
+          <div class="col-12">
+            <label for="image">Book Cover Image</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+          </div>
+  
+          <div class="col-12">
+            <button type="submit" class="btn btn-lg btn-primary">Submit listing</button>
+          </div>
+        </div>
+      
+      </form>
+  
+    </div>
+  </div>
