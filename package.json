@@ -1,11 +1,11 @@
 {
-  "name": "cookingblog",
+  "name": "mockingbird",
   "version": "1.0.0",
   "description": "This was created as part of YouTube Video. Links below",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
