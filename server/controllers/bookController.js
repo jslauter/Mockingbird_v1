@@ -114,28 +114,13 @@ exports.submitBook = async(req, res) => {
 */
 exports.submitBookOnPost = async(req, res) => {
   try {
-
-    if(!req.files || Object.keys(req.files).length === 0){
-      console.log('No Files where uploaded.')
-    } else {
-      console.log(req.file)
-      imageUploadFile = req.files.image
-      newImageName = Date.now() + imageUploadFile.name
-
-      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName
-
-      imageUploadFile.mv(uploadPath, function(err){
-        if(err) return res.status(500).send(err)
-      })
-
-    }
-
+    console.log(req.file)
     const newBook = new Book({
       name: req.body.name,
       description: req.body.description,
       quote: req.body.quote,
       songs: req.body.songs,
-      image: newImageName
+      image: req.file.path
     })
     
     await newBook.save()
@@ -146,6 +131,7 @@ exports.submitBookOnPost = async(req, res) => {
     req.flash('infoErrors', error)
     res.redirect('/submit-book')
   }
+
 }
 
 /**
@@ -163,53 +149,28 @@ exports.editBook = async(req, res) => {
 }
 
 
-// try {
-//   let bookId = req.params.id
-//   const book = await Book.findById(bookId)
-//   res.render('book', { title: 'Mockingbird - Book', book } )
-// } catch (error) {
-//   res.status(500).send({message: error.message || "Error Occured" })
-// }
-
-
-
-
 /**
  * PUT /edit-book
  * Edit Book on Post
 */
 exports.editBookOnPost = async(req, res) => {
   try {
-
-    if(!req.files || Object.keys(req.files).length === 0){
-      console.log('No Files where uploaded.')
-    } else {
-      console.log(req.file)
-      imageUploadFile = req.files.image
-      newImageName = Date.now() + imageUploadFile.name
-
-      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName
-
-      imageUploadFile.mv(uploadPath, function(err){
-        if(err) return res.status(500).send(err)
-      })
-
-    }
-
+    console.log(req.file)
     const newBook = new Book({
       name: req.body.name,
       description: req.body.description,
       quote: req.body.quote,
       songs: req.body.songs,
-      image: newImageName
+      image: req.file.map(f => ({ url: f.path, filename: f.filename}))
     })
     
     await newBook.save()
 
     req.flash('infoSubmit', 'Book has been added.')
-    res.redirect('/edit-book')
+    res.redirect('/submit-book')
   } catch (error) {
     req.flash('infoErrors', error)
-    res.redirect('/edit-book')
+    res.redirect('/submit-book')
   }
+
 }

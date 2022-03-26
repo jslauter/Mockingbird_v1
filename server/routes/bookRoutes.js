@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bookController = require('../controllers/bookController')
 const multer  = require('multer')
-const {storage} = require('./cloudinary')
+const {storage} = require('../../cloudinary')
 const upload = multer({storage})
 
 
@@ -17,7 +17,7 @@ router.post('/search', bookController.searchBook)
 router.get('/explore-latest', bookController.exploreLatest)
 router.get('/explore-random', bookController.exploreRandom)
 router.get('/submit-book', bookController.submitBook)
-router.post('/submit-book', bookController.submitBookOnPost)
+router.post('/submit-book',upload.single('image'), bookController.submitBookOnPost)
 router.get('/edit-book/:id', bookController.editBook)
 router.post('/edit-book/:id', bookController.editBookOnPost)
  

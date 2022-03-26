@@ -17,8 +17,8 @@ const bookSchema = new mongoose.Schema({
     required: 'This field is required.'
   },
   image: {
-    type: String,
-  },
+    type: String
+  }
 });
 
 bookSchema.index({ name: 'text', description: 'text' });
