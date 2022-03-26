@@ -25,10 +25,16 @@
       </div>
 
       <div class="row pt-4">
+        <%  function yt_parser(url){  %>
+          <% var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/ %> 
+          <%  var match = url.match(regExp) %> 
+         <% return (match&&match[7].length==11)? match[7] : false %>
+        <%  } %>
+        
         <%let yt = "http://www.youtube.com/watch_videos?video_ids="%> 
         <%let songStr = ""%> 
         <%for(let i = 0; i < book.songs.length; i++){%> 
-          <%if(i < book.songs.length - 1){songStr += book.songs[i] + ","} else {songStr += book.songs[i]}%>
+          <%if(i < book.songs.length - 1){songStr += yt_parser(book.songs[i]) + ","} else {songStr += yt_parser(book.songs[i])}%>
         <%}%> 
         <form action="/edit-book/<%-book.id %>" enctype="multipart/form-data" method="GET">
         <div class="col-12 m-0">
@@ -40,6 +46,7 @@
       </div>
     </div>
   </div>
+  
 <% } else { %>
   <p>No item found.</p>
 <% } %>

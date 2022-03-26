@@ -161,7 +161,7 @@ exports.editBookOnPost = async(req, res) => {
       description: req.body.description,
       quote: req.body.quote,
       songs: req.body.songs,
-      image: req.file.map(f => ({ url: f.path, filename: f.filename}))
+      image: req.file.path
     })
     
     await newBook.save()
