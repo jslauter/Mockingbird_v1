@@ -19,6 +19,6 @@ router.get('/explore-random', bookController.exploreRandom)
 router.get('/submit-book', bookController.submitBook)
 router.post('/submit-book',upload.single('image'), bookController.submitBookOnPost)
 router.get('/edit-book/:id', bookController.editBook)
-router.post('/edit-book/:id', bookController.editBookOnPost)
+router.put('/edit-book/:id',bookController.editBookOnPost)
  
 module.exports = router

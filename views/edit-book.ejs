@@ -9,7 +9,7 @@
   
     <div class="col-8">
   
-      <form action="/edit-book" enctype="multipart/form-data" method="POST">
+      <form action="/edit-book/<%=book._id%>?_method=PUT" method="POST">
       
         <div class="row g-3">
   
@@ -33,26 +33,17 @@
             <label for="songs" class="form-label">Songs(s)</label><br>
             <div class="songList">
               <div class="songDiv">
-                <input type="text" name="songs" class="form-control" placeholder="add one Youtube ID...dQw4w9WgXcQ" required>
+                <input type="text" name="songs" class="form-control" placeholder="add Youtube link" required>
               </div>
             </div>
           </div>
-          <div class="m-0">
-            <small>Example: https://www.youtube.com/watch?v=<span class="text-primary">dQw4w9WgXcQ</span>&ab_channel=RickAstley</small>
-            <br>
-            <small>Example: https://youtu.be/<span class="text-primary">dQw4w9WgXcQ</span>&ab</small>
-          </div>
-          <div class="col-12 m-0">
+          
+          <div class="col-12 mt-2">
             <button type="button" class="btn btn-outline-primary" id="addSongBtn">+ to add more than one song</button>
           </div>
   
           <div class="col-12">
-            <label for="image">Book Cover Image</label>
-            <input type="file" class="form-control" name="image" accept="image/*">
-          </div>
-  
-          <div class="col-12">
-            <button type="submit" class="btn btn-lg btn-primary">Submit listing</button>
+            <button type="submit" class="btn btn-lg btn-primary">Update listing</button>
           </div>
         </div>
       

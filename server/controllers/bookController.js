@@ -114,7 +114,6 @@ exports.submitBook = async(req, res) => {
 */
 exports.submitBookOnPost = async(req, res) => {
   try {
-    console.log(req.file)
     const newBook = new Book({
       name: req.body.name,
       description: req.body.description,
@@ -154,23 +153,22 @@ exports.editBook = async(req, res) => {
  * Edit Book on Post
 */
 exports.editBookOnPost = async(req, res) => {
-  try {
-    console.log(req.file)
-    const newBook = new Book({
-      name: req.body.name,
-      description: req.body.description,
-      quote: req.body.quote,
-      songs: req.body.songs,
-      image: req.file.path
-    })
-    
-    await newBook.save()
+  try{
+    let bookId = req.params.id
 
-    req.flash('infoSubmit', 'Book has been added.')
-    res.redirect('/submit-book')
-  } catch (error) {
-    req.flash('infoErrors', error)
-    res.redirect('/submit-book')
+    const book = await Book.findByIdAndUpdate(bookId,{
+            name: req.body.name,
+            description: req.body.description,
+            quote: req.body.quote,
+    })
+    const song = await Book.findByIdAndUpdate(bookId,
+      {$push: {songs: req.body.songs}}
+    )
+
+    console.log(req.body.name)
+    res.redirect(`/book/${bookId}`)  
+  }catch(error){
+    console.log(error)
   }
 
 }
