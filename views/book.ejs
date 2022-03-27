@@ -7,46 +7,45 @@
     </ol>
   </nav>
 
+  <div class="col-m"><h1 class="display-2 text-center"><%- book.name %></h1></div>
+  <div class="col-12 mb-4 text-italic text-secondary text-center"><i class="bi bi-chat-right-quote"></i> <%- book.quote %></div>
 
-  <div class="row">
-
-    <div class="col-12 col-md-4">
-      <img src="<%-book.image%>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- book.name %>" loading="lazy">
-    </div>
-
-    <div class="col-12 col-md-8">
-      <div class="row">
-        <div class="col-12"><h1><%- book.name %></h1></div>
-        <div class="col-12 mb-4 text-italic text-secondary"><i class="bi bi-chat-right-quote"></i> <%- book.quote %></div>
-        <div class="col-12" style="white-space: pre-line;">
-          <h4>Description</h4>
-          <%- book.description %>
-        </div>
+  <div class="container-xxl px-md-5 bg-white shadow-lg">
+    <div class="row">
+     <div class="col-lg-6 d-flex align-items-center justify-content-center">
+      <div class="card" style="width: 22rem;">
+        <img src="<%-book.image%>" class="card-img-top" style="top: 20px;" alt="<%- book.name %>" loading="lazy">
       </div>
-
-      <div class="row pt-4">
-        <%  function yt_parser(url){  %>
-          <% var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/ %> 
-          <%  var match = url.match(regExp) %> 
-         <% return (match&&match[7].length==11)? match[7] : "dQw4w9WgXcQ" %>
-        <%  } %>
-        
-        <%let yt = "http://www.youtube.com/watch_videos?video_ids="%> 
-        <%let songStr = ""%> 
-        <%for(let i = 0; i < book.songs.length; i++){%> 
-          <%if(i < book.songs.length - 1){songStr += yt_parser(book.songs[i]) + ","} else {songStr += yt_parser(book.songs[i])}%>
-        <%}%> 
-        <form action="/edit-book/<%-book.id %>" enctype="multipart/form-data" method="GET">
-        <div class="col-12 m-0">
-          <a href="<%-yt + songStr%> " target="_blank"><button type="button" class="btn btn-success" id="addSongBtn">Playlist for <%- book.name %></button></a>
-        </div>
-        <div class="col-12">
-          <button type="" class="btn btn-primary mt-3">Contribute to this Book Listing</button>
+    </div>
+    
+    <div class="col-lg-6 d-flex align-items-center justify-content-center">
+      <%  function yt_parser(url){  %>
+        <% var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/ %> 
+        <%  var match = url.match(regExp) %> 
+       <% return (match&&match[7].length==11)? match[7] : "dQw4w9WgXcQ" %>
+      <%  } %>
+      
+      <%let yt = "http://www.youtube.com/embed/hcdQnK84Pl4?playlist="%> 
+      <%let songStr = ""%> 
+      <%for(let i = 0; i < book.songs.length; i++){%> 
+        <%if(i < book.songs.length - 1){songStr += yt_parser(book.songs[i]) + ","} else {songStr += yt_parser(book.songs[i])}%>
+      <%}%> 
+      <div class="card" style="width: 22rem;">
+        <iframe style="width: 22rem;" height="315" src= "<%-yt + songStr%> " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="card-body text-center">
+          <h5 class="card-title text-center">Music Playlist</h5>
+          <form action="/edit-book/<%-book.id %>" enctype="multipart/form-data" method="GET">
+          <button type="" class="btn btn-success btn-lg mt-3 ">Add More songs!</button>
         </div>
       </div>
     </div>
+    <div class="col">
+      <h5 class="card-title text-center py-2"><span class="border-bottom border-dark py-1">Synopsis</span></h5>
+      <p class="card-text font-italic"><%- book.description %></p>
   </div>
-
-<% } else { %>
-  <p>No item found.</p>
-<% } %>
+  </div>
+  <% } else { %>
+    <p>No item found.</p>
+  <% } %>
+</div>
+  
