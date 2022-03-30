@@ -18,11 +18,13 @@ const bookSchema = new mongoose.Schema({
   },
   image: {
     type: String
+  },
+  category: {
+    type: String,
+    required: 'This field is required'
   }
 });
 
 bookSchema.index({ name: 'text', description: 'text' });
-// WildCard Indexing
-//bookSchema.index({ "$**" : 'text' });
 
 module.exports = mongoose.model('Book', bookSchema);

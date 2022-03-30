@@ -68,18 +68,75 @@ exports.searchBook= async(req, res) => {
 
 /**
  * GET /explore-latest
- * Explplore Latest 
+ * Explore Latest Books
 */
 exports.exploreLatest = async(req, res) => {
   try {
-    const limitNumber = 20
+    const limitNumber = 100
+    const book = await Book.find({'category': 'book'}).sort({ _id: -1 }).limit(limitNumber)
+    res.render('explore-latest', { title: 'Mockingbird - Books', book } )
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" })
+  }
+}
+/**
+ * GET /explore-latest-all
+ * Explore Latest all
+*/
+exports.exploreLatestAll = async(req, res) => {
+  try {
+    const limitNumber = 100
     const book = await Book.find({}).sort({ _id: -1 }).limit(limitNumber)
-    res.render('explore-latest', { title: 'Mockingbird - Explore Latest', book } )
+    res.render('explore-latest-all', { title: 'Mockingbird - All', book } )
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" })
+  }
+}
+
+
+/**
+ * GET /explore-latest-graphic_novels
+ * Explplore Latest graphic novels
+*/
+exports.exploreLatestGraphicNovels = async(req, res) => {
+  try {
+    const limitNumber = 100
+    const book = await Book.find({ 'category': 'comic' }).sort({_id: -1}).limit(limitNumber)
+    res.render('explore-latest-graphic_novels', { title: 'Mockingbird - Graphic Novels / Comics', book } )
   } catch (error) {
     res.status(500).send({message: error.message || "Error Occured" })
   }
 } 
 
+/**
+ * GET /explore-latest-Games
+ * Explore Latest Games
+*/
+
+
+exports.exploreLatestGames = async(req, res) => {
+  try {
+    const limitNumber = 100
+    const book = await Book.find({ 'category': 'game' }).sort({_id: -1}).limit(limitNumber)
+    res.render('explore-latest-games', { title: 'Mockingbird - Games', book } )
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" })
+  }
+} 
+
+/**
+ * GET /explore-latest-micell
+ * Explore Latest micell
+*/
+exports.exploreLatestMicell = async(req, res) => {
+  try {
+    const limitNumber = 100
+    const book = await Book.find({ 'category': 'miscellaneous' }).sort({_id: -1}).limit(limitNumber)
+    res.render('explore-latest-micell', { title: 'Mockingbird - Micellaneous', book } )
+  } catch (error) {
+    res.status(500).send({message: error.message || "Error Occured" })
+  }
+} 
 
 
 /**
@@ -119,9 +176,9 @@ exports.submitBookOnPost = async(req, res) => {
       description: req.body.description,
       quote: req.body.quote,
       songs: req.body.songs,
-      image: req.file.path
+      image: req.file.path,
+      category: req.body.category
     })
-    
     await newBook.save()
 
     req.flash('infoSubmit', 'Book has been added.')

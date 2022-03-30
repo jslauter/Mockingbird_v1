@@ -1,18 +1,29 @@
-<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+<div class="row flex-lg-row-reverse align-items-center g-5 pt-4 mb-4">
   <div class="col-12 col-lg-6">
     <img src="/img/audiobook.png" width="607" height="510" class="d-block mx-lg-auto img-fluid" loading="lazy" alt="Cooking With Node.js">
   </div>
 
   <div class="col-12 col-lg-6">
-    <h1 class="display-5 fw-bold mb-3">Books + Beats = <span class="display-1">Mockingbird</span></h1>
-    <p class="lead">Looking for some music to go with that glass of wine and hardback (OR comic OR graphic novel OR trashy romance novel) you're reading? Well we may have a playlist ready to go for you! If not create your own!!</p>
+    <h1 class="display-1">Mockingbird</h1>
+    <p class="lead">Crowdsourced music playlists for that book you're reading, that boardgame you're losing at or something else you like to do</p>
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-      <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
+      <div class="dropdown">
+        <button class="btn btn-primary btn-dark btn-lg px-4 me-md-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Explore
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/explore-latest">Books</a>
+          <a class="dropdown-item" href="/explore-latest-graphic_novels">Graphic Novels / Comics</a>
+          <a class="dropdown-item" href="/explore-latest-games">Games</a>
+          <a class="dropdown-item" href="/explore-latest-micell">Miscellaneous</a>
+          <a class="dropdown-item" href="/explore-latest-all">Everything</a>
+        </div>
+      </div>
       <a href="/explore-random" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Show Random</a>
     </div>
     <div class="col mt-3">
       <form method="POST" action="/search">
-        <input type="search" name="searchTerm" class="form-control" placeholder="Search for a book..." aria-label="Search">
+        <input type="search" name="searchTerm" class="form-control" placeholder="Search for book/game..." aria-label="Search">
       </form>
   </div>
   </div>
@@ -21,9 +32,9 @@
 
 <!-- Latest Start -->
 
-<section class="pb-4 pt-4">
+<section class="pb-4">
   <div class="d-flex mb-2 align-items-center">
-    <h2>Latest Book listings</h2>
+    <h2>Recent listings</h2>
     <a href="/explore-latest" class="ms-auto">View More</a>
   </div>
 
